@@ -1,0 +1,35 @@
+* {
+    background-color: darkslateblue;
+}
+
+#startButton {
+    background-color: black;
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 80px;
+    position: absolute;
+    left: 37%;
+    top: 45%;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.output {
+    background-color: aliceblue;
+    font-weight: bold;
+    font-size: 80px;
+    position: absolute;
+    left: 45%;
+    top: 45%;
+}
+
+#userInput {
+    background-color: aliceblue;
+    font-weight: bold;
+    font-size: 45px;
+    position: absolute;
+    left: 34.5%;
+    top: 35%;
+}
