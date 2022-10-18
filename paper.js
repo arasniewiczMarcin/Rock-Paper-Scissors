@@ -1,4 +1,6 @@
-
+let info = document.querySelector('.info');
+let info2 = document.querySelector('.info2');
+let uScore = 0, pcScore = 0;
 
 const getComputerChoice = () => {
     let pcChoice = 0;
@@ -13,73 +15,95 @@ const getComputerChoice = () => {
             return 'paper';
     }
 }
+
 const playRound = (playerSelection, computerSelection) => {
-    console.log(`Program choose ${computerSelection}`);
-    console.log(`User choose ${playerSelection}`);
+
+    info2.textContent = `Program choose ${computerSelection}, User choose ${playerSelection}`;
     if (playerSelection == computerSelection) {
-        console.log(`its a draw, refresh the page and try again. ${playerSelection} equals ${computerSelection}`);
+        info.textContent = `its a draw. ${playerSelection} equals ${computerSelection}`;
         uScore++;
         pcScore++;
+        showScore(uScore, pcScore);
+
     }
     else if (playerSelection == 'rock' && computerSelection == 'scissors' || playerSelection == 'scissors' && computerSelection == 'paper' || playerSelection == 'paper' && computerSelection == 'rock') {
-        console.log(`Congrats user, you won! ${playerSelection} beats ${computerSelection}`);
+        info.textContent = `Congrats user, you won! ${playerSelection} beats ${computerSelection}`;
         uScore++;
+        showScore(uScore, pcScore);
     }
     else {
-        console.log(`nah user, you lost! ${computerSelection} beats ${playerSelection}`);
+        info.textContent = `nah user, you lost! ${computerSelection} beats ${playerSelection}`;
         pcScore++;
+        showScore(uScore, pcScore);
     }
+    if (uScore == 5 || pcScore == 5) {
+        evaluateGame(uScore, pcScore);
+        uScore = 0;
+        pcScore = 0;
+        showScore(uScore, pcScore);
+    }
+    showScore(uScore, pcScore);
+
 }
 
 const evaluateGame = (uScore, pcScore) => {
-    if (uScore > pcScore) console.log(`Its over. Finally you won against pc in a tough match. its ${uScore} : ${pcScore} for you`);
-    else if (uScore < pcScore) console.log(`Its over. Finally you lost against pc in a tough match. its ${uScore} : ${pcScore} for pc`);
-    else console.log(`Its over. Finally you draw against pc in a tough match. its ${uScore} : ${pcScore}`);
+    if (uScore > pcScore) info.textContent = `Its over. Finally you won against pc in a tough match. its ${uScore} : ${pcScore} for you`;
+    else if (uScore < pcScore) info.textContent = `Its over. Finally you lost against pc in a tough match. its ${uScore} : ${pcScore} for pc`;
+    else info.textContent = `Its over. Finally you draw against pc in a tough match. its ${uScore} : ${pcScore}`;
 }
 
-let uScore = 0, pcScore = 0;
-const game = () => {
+const showScore = (uScore, pcScore) => {
+    let score = document.querySelector('.output');
+    score.textContent = `${uScore} : ${pcScore}`;
+}
+const showImages = (img1, img2, img3) => {
 
-    while (uScore != 5 && pcScore != 5) {
-        let playerSelection = prompt('Input your choice').toLowerCase();
+    img1.src = 'images/rock.jpg';
+    document.getElementById('rock').appendChild(img1);
+
+    img2.src = 'images/paper.jpg';
+    document.getElementById('paper').appendChild(img2);
+
+    img3.src = 'images/scissors.jpg';
+    document.getElementById('scissors').appendChild(img3);
+
+}
+const userChoice = (img1, img2, img3) => {
+
+    img1.onclick = () => {
+        playerSelection = 'rock';
         let computerSelection = getComputerChoice();
         playRound(playerSelection, computerSelection);
     }
-    evaluateGame(uScore, pcScore);
-    uScore = 0;
-    pcScore = 0;
+    img2.onclick = () => {
+        playerSelection = 'paper';
+        let computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+    }
+
+    img3.onclick = () => {
+        playerSelection = 'scissors';
+        let computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+    }
+}
+
+const game = () => {
+
+    let img1 = document.createElement('img');
+    let img2 = document.createElement('img');
+    let img3 = document.createElement('img');
+    userChoice(img1, img2, img3);
+    showImages(img1, img2, img3);
+    showScore(uScore, pcScore);
+
 }
 
 const disappearButton = () => { //disappear button and shows score
     button.style.display = 'none';
-    score.style.display = 'block'
+    game();
 }
-//game();
+
 const button = document.querySelector('#startButton');
 
 button.addEventListener('click', disappearButton);
-
-let score = document.querySelector('.output');
-let userChoice = document.createElement("div");
-let compChoice = document.createElement("div");
-
-score.style.display = 'none';
-score.textContent = `${uScore} : ${pcScore}`;
-
-
-
-
-
-
-
-/*Button start game
-Input na stronce (daj placeholder input your choice) czy cos takiego
-Daj 4 divy ktore populuje js 
-User score (daj 0 w html js textcontent polacz z uscore)
-PC score jak wyzej
-User choice: rock (zamiast console logować daj w text content tego diva to co wybral)
-PC choice jak wyzej
-Do tych 4 divow najlepiej zrób funkcje oddzielne zeby nie robić 1 dużej funkcji (SRP) ktora bedzie populować te divy np const changeUserscore(uscore) => {..} moze overkill ale mnie bolal dlugo nawyk ogromnych funkcji
-Jak gra sie skonczy mozesz te divy z choice wyjebac w jsie w sensie textcontent = ‘’ pusty string i dać final score czy coś winner
-Generalnie zeby pocwiczyc sobie DOM Manipulation, addEventListener
-*/

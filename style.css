@@ -22,14 +22,48 @@ button:hover {
     font-size: 80px;
     position: absolute;
     left: 45%;
-    top: 45%;
+    top: 40%;
 }
 
-#userInput {
+img {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+#rock {
+    left: 29%;
+}
+
+#paper {
+
+    left: 44%;
+}
+
+#scissors {
+
+    left: 59%;
+}
+
+.icons {
+    position: absolute;
+    top: 55%;
+}
+
+.info,
+.info2 {
     background-color: aliceblue;
     font-weight: bold;
-    font-size: 45px;
+    font-size: 40px;
     position: absolute;
-    left: 34.5%;
-    top: 35%;
+    left: 30%;
+    top: 20%;
+}
+
+.info2 {
+    top: 10%;
 }
