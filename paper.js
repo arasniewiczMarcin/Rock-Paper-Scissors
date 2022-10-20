@@ -1,5 +1,14 @@
-let info = document.querySelector('.info');
-let info2 = document.querySelector('.info2');
+const info = document.querySelector('.info');
+const info2 = document.querySelector('.info2');
+const score = document.querySelector('.output');
+const button = document.querySelector('.startButton');
+const buttonRock = document.querySelector('.but1');
+const buttonPaper = document.querySelector('.but2');
+const buttonScissors = document.querySelector('.but3');
+const img1 = document.createElement('img');
+const img2 = document.createElement('img');
+const img3 = document.createElement('img');
+
 let uScore = 0, pcScore = 0;
 
 const getComputerChoice = () => {
@@ -53,47 +62,41 @@ const evaluateGame = (uScore, pcScore) => {
 }
 
 const showScore = (uScore, pcScore) => {
-    let score = document.querySelector('.output');
+
     score.textContent = `${uScore} : ${pcScore}`;
 }
 const showImages = (img1, img2, img3) => {
 
     img1.src = 'images/rock.jpg';
-    document.getElementById('rock').appendChild(img1);
+    document.querySelector('.rock').appendChild(img1);
 
     img2.src = 'images/paper.jpg';
-    document.getElementById('paper').appendChild(img2);
+    document.querySelector('.paper').appendChild(img2);
 
     img3.src = 'images/scissors.jpg';
-    document.getElementById('scissors').appendChild(img3);
+    document.querySelector('.scissors').appendChild(img3);
 
 }
-const userChoice = (img1, img2, img3) => {
+const rockChoice = () => {
 
-    img1.onclick = () => {
-        playerSelection = 'rock';
-        let computerSelection = getComputerChoice();
-        playRound(playerSelection, computerSelection);
-    }
-    img2.onclick = () => {
-        playerSelection = 'paper';
-        let computerSelection = getComputerChoice();
-        playRound(playerSelection, computerSelection);
-    }
+    playerSelection = 'rock';
+    let computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
+}
+const paperChoice = () => {
 
-    img3.onclick = () => {
-        playerSelection = 'scissors';
-        let computerSelection = getComputerChoice();
-        playRound(playerSelection, computerSelection);
-    }
+    playerSelection = 'paper';
+    let computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
+}
+const scissorsChoice = () => {
+
+    playerSelection = 'scissors';
+    let computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
 }
 
 const game = () => {
-
-    let img1 = document.createElement('img');
-    let img2 = document.createElement('img');
-    let img3 = document.createElement('img');
-    userChoice(img1, img2, img3);
     showImages(img1, img2, img3);
     showScore(uScore, pcScore);
 
@@ -104,6 +107,7 @@ const disappearButton = () => { //disappear button and shows score
     game();
 }
 
-const button = document.querySelector('#startButton');
-
 button.addEventListener('click', disappearButton);
+buttonRock.addEventListener('click', rockChoice);
+buttonPaper.addEventListener('click', paperChoice);
+buttonScissors.addEventListener('click', scissorsChoice);
